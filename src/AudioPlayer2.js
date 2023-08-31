@@ -71,11 +71,21 @@ function AudioPlayer2({ audioSrc }) {
           <p>{formatDuration(duration)}</p>
         </div>
 
-        <button onClick={handlePlayPause}>
-          <span className="material-symbols-rounded">
-            {isPlaying ? "⏸" : "▶"}
-          </span>
-        </button>
+        <div className="flex flex2">
+          <button className="flex-items">
+            <span className="back-forth">⏮</span>
+          </button>
+
+          <button className="flex-items">
+            <span onClick={handlePlayPause} className="play-pause">
+              {isPlaying ? "⏸" : "▶"}
+            </span>
+          </button>
+
+          <button className="flex-items">
+            <span className="back-forth">⏭</span>
+          </button>
+        </div>
       </div>
     </>
   );
