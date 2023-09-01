@@ -98,9 +98,7 @@ input[type="range"] {
 }
 
 .flex-items {
-  /* margin: 5px 30px auto 30px; */
   text-align: center;
-
   border: none;
   margin-bottom: 5px;
 }
