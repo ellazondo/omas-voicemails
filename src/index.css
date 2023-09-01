@@ -101,6 +101,8 @@ input[type="range"] {
   text-align: center;
   border: none;
   margin-bottom: 5px;
+  background-color: transparent !important;
+  border: none !important;
 }
 
 .play-pause {
@@ -111,9 +113,16 @@ input[type="range"] {
   font-size: 16px;
   font-weight: 600;
   border: none;
-  border-radius: 40%;
-  padding: 8px;
+  border-radius: 50%;
+  padding: 0px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-forth {
+  font-size: 16px;
 }
 
 .voicemail-list {

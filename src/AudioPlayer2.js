@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import omagpaGif from "./omagpa.gif";
 
 function AudioPlayer2({ audioSrc }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -51,12 +52,7 @@ function AudioPlayer2({ audioSrc }) {
   return (
     <>
       <div className="player-card">
-        <img
-          src="https://im5.ezgif.com/tmp/ezgif-5-3f453c87e3.gif"
-          alt="Cover Image"
-          //https://im5.ezgif.com/tmp/ezgif-5-3fae5324c8.png
-          //https://images.unsplash.com/photo-1604782666037-3c63d50052db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1827&q=80
-        />
+        <img src={omagpaGif} />
 
         <input
           type="range"
@@ -65,14 +61,11 @@ function AudioPlayer2({ audioSrc }) {
           value={currentTime}
           onChange={handleSeek}
         />
-
         <audio ref={audioRef} src={audioSrc} />
-
         <div className="track-duration">
           <p>{formatDuration(currentTime)}</p>
           <p>{formatDuration(duration)}</p>
         </div>
-
         <div className="flex flex2">
           <button className="flex-items">
             <span className="back-forth">⏮</span>
@@ -94,3 +87,7 @@ function AudioPlayer2({ audioSrc }) {
 }
 
 export default AudioPlayer2;
+
+//https://images.unsplash.com/photo-1604782666037-3c63d50052db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1827&q=80
+//https://i.imgur.com/wXX15cy.mp4
+//https://im5.ezgif.com/tmp/ezgif-5-3fae5324c8.png
