@@ -1,8 +1,10 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 
-function AudioPlayer({ soundcloudUrl }) {
+function AudioPlayer() {
   const [embedCode, setEmbedCode] = useState(null);
+
+  const soundcloudUrl = "https://on.soundcloud.com/6dM9Q";
 
   useEffect(() => {
     fetch(`https://soundcloud.com/oembed?url=${soundcloudUrl}&format=json`)

@@ -1,4 +1,5 @@
 import React from "react";
+import AudioPlayer from "./AudioPlayer";
 
 import AudioPlayer2 from "./AudioPlayer2";
 // import ListOfVoicemails from "./ListOfVoicemails";
@@ -13,6 +14,9 @@ function App() {
         <div className="voicemail-container">{/* <ListOfVoicemails /> */}</div>
         <div className="audio-container">
           <AudioPlayer2 audioSrc={AUDIO_FILE} />
+        </div>
+        <div>
+          <AudioPlayer />
         </div>
       </div>
     </>
