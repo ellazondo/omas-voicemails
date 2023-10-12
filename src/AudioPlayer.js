@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import omagpaGif from "./omagpa.gif";
 
-function AudioPlayer({ audioSrc }) {
+function AudioPlayer() {
+  const AUDIO_FILE_DEFAULT = "./26.7.19.mp3";
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [currentTrack, setCurrentTrack] = useState(AUDIO_FILE_DEFAULT);
   const audioRef = useRef(null);
+
+  //create a list of audiofiles
+  const audio_file1 = "./01.10.21.mp3";
 
   const handlePlay = () => {
     audioRef.current.play();
@@ -26,7 +31,16 @@ function AudioPlayer({ audioSrc }) {
   };
 
   const handleNext = () => {
-    console.log("next");
+    setCurrentTrack(audio_file1);
+    audioRef.current.load();
+    audioRef.current.addEventListener(
+      "canplay",
+      () => {
+        audioRef.current.play();
+        setIsPlaying(true);
+      },
+      { once: true }
+    );
   };
 
   const handleTimeUpdate = () => {
@@ -53,6 +67,19 @@ function AudioPlayer({ audioSrc }) {
     };
   }, []);
 
+  useEffect(() => {
+    audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+    audioRef.current.addEventListener("loadedmetadata", () => {
+      setDuration(audioRef.current.duration);
+    });
+    return () => {
+      audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+      audioRef.current.removeEventListener("loadedmetadata", () => {
+        setDuration(audioRef.current.duration);
+      });
+    };
+  }, []);
+
   return (
     <>
       <div className="player-card">
@@ -65,7 +92,7 @@ function AudioPlayer({ audioSrc }) {
           value={currentTime}
           onChange={handleSeek}
         />
-        <audio ref={audioRef} src={audioSrc} />
+        <audio ref={audioRef} src={currentTrack} />
         <div className="track-duration">
           <p>{formatDuration(currentTime)}</p>
           <p>{formatDuration(duration)}</p>
