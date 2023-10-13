@@ -1,16 +1,31 @@
 import React, { useState, useRef, useEffect } from "react";
-import omagpaGif from "./omagpa.gif";
 
 function AudioPlayer() {
   const AUDIO_FILE_DEFAULT = "./26.7.19.mp3";
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [currentPhoto, setCurrentPhoto] = useState("./omagpa.gif");
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [currentTrack, setCurrentTrack] = useState(AUDIO_FILE_DEFAULT);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const audioRef = useRef(null);
 
-  //create a list of audiofiles
-  const audio_file1 = "./01.10.21.mp3";
+  const audio_files = [
+    "./01.10.21.mp3",
+    "./7-6-19.mp3",
+    "./7-17-19.mp3",
+    "./7-26-19.mp3",
+    "./26.7.19.mp3",
+  ];
+
+  const photos = [
+    "./omasnow.gif",
+    "./omapool.png",
+    "./IMG_0963.JPG",
+    "./garageoma.gif",
+    "./omagpa.gif",
+  ];
 
   const handlePlay = () => {
     audioRef.current.play();
@@ -31,7 +46,12 @@ function AudioPlayer() {
   };
 
   const handleNext = () => {
-    setCurrentTrack(audio_file1);
+    const nextTrackIndex = (currentTrackIndex + 1) % audio_files.length;
+    const nextPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+    setCurrentTrackIndex(nextTrackIndex);
+    setCurrentTrack(audio_files[nextTrackIndex]);
+    setCurrentPhotoIndex(nextPhotoIndex);
+    setCurrentPhoto(photos[nextPhotoIndex]);
     audioRef.current.load();
     audioRef.current.addEventListener(
       "canplay",
@@ -61,21 +81,23 @@ function AudioPlayer() {
   }
 
   useEffect(() => {
-    audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+    const audioElement = audioRef.current;
+    audioElement.addEventListener("timeupdate", handleTimeUpdate);
     return () => {
-      audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+      audioElement.removeEventListener("timeupdate", handleTimeUpdate);
     };
   }, []);
 
   useEffect(() => {
-    audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
-    audioRef.current.addEventListener("loadedmetadata", () => {
-      setDuration(audioRef.current.duration);
+    const audioElement = audioRef.current;
+    audioElement.addEventListener("timeupdate", handleTimeUpdate);
+    audioElement.addEventListener("loadedmetadata", () => {
+      setDuration(audioElement.duration);
     });
     return () => {
-      audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
-      audioRef.current.removeEventListener("loadedmetadata", () => {
-        setDuration(audioRef.current.duration);
+      audioElement.removeEventListener("timeupdate", handleTimeUpdate);
+      audioElement.removeEventListener("loadedmetadata", () => {
+        setDuration(audioElement.duration);
       });
     };
   }, []);
@@ -83,7 +105,7 @@ function AudioPlayer() {
   return (
     <>
       <div className="player-card">
-        <img src={omagpaGif} />
+        <img src={currentPhoto} alt="oma grandpa gif" />
 
         <input
           type="range"
@@ -99,7 +121,7 @@ function AudioPlayer() {
         </div>
         <div className="flex flex2">
           <button className="flex-items">
-            <span className="back-forth">⏮</span>
+            <span className="back-forth"></span>
           </button>
 
           <button className="flex-items">
