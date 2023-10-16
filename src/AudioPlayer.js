@@ -23,7 +23,6 @@ function AudioPlayer() {
     "./omasnow.gif",
     "./omapool.png",
     "./IMG_0963.JPG",
-    "./garageoma.gif",
     "./omagpa.gif",
   ];
 
