@@ -12,18 +12,18 @@ function AudioPlayer() {
   const audioRef = useRef(null);
 
   const audio_files = [
+    "./26.7.19.mp3",
     "./01.10.21.mp3",
     "./7-6-19.mp3",
     "./7-17-19.mp3",
     "./7-26-19.mp3",
-    "./26.7.19.mp3",
   ];
 
   const photos = [
+    "./omagpa.gif",
     "./omasnow.gif",
     "./omapool.png",
     "./IMG_0963.JPG",
-    "./omagpa.gif",
   ];
 
   const handlePlay = () => {
